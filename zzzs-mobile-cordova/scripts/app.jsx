@@ -5,7 +5,6 @@
   
   let AppRoutes = require('./routes.jsx');
   let injectTapEventPlugin = require('react-tap-event-plugin');
-  let Main = require('./components/main.jsx');
 
   document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 

@@ -5,10 +5,10 @@ let Redirect = Router.Redirect;
 let DefaultRoute = Router.DefaultRoute;
 
 // Here we define all our material-ui ReactComponents.
-let Main = require('./components/main.jsx');
-let Information = require('./components/information.jsx');
-let Article = require('./components/article.jsx');
-let Empty = require('./components/empty.jsx');
+let Main = require('./routes/main.jsx');
+let Information = require('./routes/information.jsx');
+let Article = require('./routes/article.jsx');
+let Empty = require('./routes/empty.jsx');
 let AppRoutes = (
     <Route name="root" path="/" handler={Main}>
         <Route path="/information/" handler={Information} />
