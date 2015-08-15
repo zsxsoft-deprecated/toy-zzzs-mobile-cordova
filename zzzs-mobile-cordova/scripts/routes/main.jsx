@@ -4,10 +4,10 @@ let React = require('react');
 let mui = require('material-ui');
 let Router = require('react-router');
 let { Route, RouteHandler, Link } = Router; 
-let {LeftNav, AppBar, MenuItem, IconMenu, IconButton, SvgIcon} = mui;
+let { LeftNav, AppBar, MenuItem, IconMenu, IconButton, SvgIcon, Styles } = mui;
+let { Colors, Spacing, Typography } = Styles;
 
 let ThemeManager = new mui.Styles.ThemeManager();
-let Colors = mui.Styles.Colors;
 let menuItems = [{
     route: '/information/\?url=gkxx%2Fzzzs%2F',
     text: '自招动态'
@@ -77,12 +77,27 @@ let Main = React.createClass({
         
     },
 
+    getStyles() {
+        return {
+            cursor: 'pointer',
+            //.mui-font-style-headline
+            fontSize: '24px',
+            color: Typography.textFullWhite,
+            lineHeight: Spacing.desktopKeylineIncrement + 'px',
+            fontWeight: Typography.fontWeightLight,
+            backgroundColor: Colors.cyan500,
+            paddingLeft: Spacing.desktopGutter,
+            paddingTop: '0px',
+            marginBottom: '8px'
+        };
+    },
+
     render() {
 
 
         return (
             <div>
-              <LeftNav ref="leftNav" docked={false} menuItems={menuItems} selectedIndex={this._getSelectedIndex()} onChange={this._onLeftNavChange}/>
+              <LeftNav ref="leftNav" docked={false} menuItems={menuItems} selectedIndex={this._getSelectedIndex()} onChange={this._onLeftNavChange} header={<div style={this.getStyles()}>自主招生</div>}/>
               <AppBar title="自主招生" onLeftIconButtonTouchTap={this._toggleLeftMenu} />
               <RouteHandler />
  

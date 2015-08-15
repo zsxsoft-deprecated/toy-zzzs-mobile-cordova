@@ -4,7 +4,7 @@
   <description>For zzzs</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">zsx</author>
   <content src="index.html" />
-  <access origin="www.zsxsoft.com" />
+  <access origin="*.zsxsoft.com" />
   <vs:features />
   <preference name="SplashScreen" value="screen" />
   <preference name="windows-target-version" value="8.1" />
@@ -104,12 +104,11 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.jpg" width="480" height="800" />
   </platform>
-  <vs:plugin name="cordova-plugin-device" version="1.0.1" />
   <vs:plugin name="cordova-plugin-dialogs" version="1.1.1" />
-  <preference name="KeepRunning" value="True" />
-  <preference name="ShowTitle" value="True" />
-  <preference name="InAppBrowserStorageEnabled" value="True" />
-  <preference name="SuppressesIncrementalRendering" value="True" />
+  <preference name="KeepRunning" value="False" />
+  <preference name="ShowTitle" value="False" />
+  <preference name="InAppBrowserStorageEnabled" value="False" />
+  <preference name="SuppressesIncrementalRendering" value="False" />
   <access origin="zizhu.zsxsoft.com" />
   <access origin="blog.zsxsoft.com" />
 </widget>
