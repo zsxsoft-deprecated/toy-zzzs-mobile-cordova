@@ -1,4 +1,23 @@
 {
+    "cordova-plugin-xgpush": {
+        "source": {
+            "type": "local",
+            "path": "plugins\\xgpush-cordova"
+        },
+        "is_top_level": true,
+        "variables": {
+            "ACCESS_ID": "",
+            "ACCESS_KEY": ""
+        }
+    },
+    "es6-promise-plugin": {
+        "source": {
+            "type": "local",
+            "path": "plugins\\es6-promise-plugin"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
