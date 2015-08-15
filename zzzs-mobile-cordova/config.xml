@@ -104,10 +104,11 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.jpg" width="480" height="800" />
   </platform>
-  <preference name="KeepRunning" value="False" />
-  <preference name="ShowTitle" value="False" />
-  <preference name="InAppBrowserStorageEnabled" value="False" />
-  <preference name="SuppressesIncrementalRendering" value="False" />
+  <preference name="KeepRunning" value="True" />
+  <preference name="ShowTitle" value="True" />
+  <preference name="InAppBrowserStorageEnabled" value="True" />
+  <preference name="SuppressesIncrementalRendering" value="True" />
   <access origin="zizhu.zsxsoft.com" />
   <access origin="blog.zsxsoft.com" />
+  <vs:plugin name="com.phonegap.plugins.PushPlugin" version="2.5.0" src="D:\Projects\zzzs-mobile-cordova\zzzs-mobile-cordova\plugins\com.phonegap.plugins.PushPlugin" />
 </widget>
