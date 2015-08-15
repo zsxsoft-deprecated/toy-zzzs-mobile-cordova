@@ -43214,7 +43214,9 @@ var Information = React.createClass({
         };
     },
 
-    _openOffical: function _openOffical(url) {},
+    _openOffical: function _openOffical(url) {
+        window.open("http://gaokao.chsi.com.cn" + url);
+    },
 
     render: function render() {
 

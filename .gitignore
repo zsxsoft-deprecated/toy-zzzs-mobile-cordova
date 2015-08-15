@@ -216,3 +216,4 @@ ModelManifest.xml
 
 # Ignore plugins
 */plugins/*
+*/www/scripts/app.js

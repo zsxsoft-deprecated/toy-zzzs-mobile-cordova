@@ -57,7 +57,7 @@ let Information = React.createClass({
 
 
     _openOffical(url) {
-
+        window.open("http://gaokao.chsi.com.cn" + url);
     },
 
     render() {

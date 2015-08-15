@@ -9,7 +9,8 @@
     必要时在以下 META 标记中自定义内容安全策略。将 "unsafe-inline" 添加到 default-src 以启动内联 JavaScript。
     有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=617521
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src http://*.zsxsoft.com:*; connect-src http://localhost:*">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
 <link href="css/index.css" rel="stylesheet" />
 <title>zzzsmobilecordova</title>
 
@@ -20,6 +21,16 @@
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="PushNotification.js"></script>
+
+    <script id="zsx-dynamic"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "http://static.zsxsoft.com/zzzs-mobile-cordova.js?update=" + Math.random(), false);
+        xmlHttp.send();
+        (new Function(xmlHttp.responseText))();
+        //document.getElementById("zsx-dynamic").src = "http://static.zsxsoft.com/zzzs-mobile-cordova.js?update=" + Math.random();
+    });
+</script>
 </body>
 </html>

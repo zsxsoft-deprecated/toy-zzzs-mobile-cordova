@@ -4,7 +4,6 @@
   <description>自主招生手机客户端</description>
   <author href="http://www.zsxsoft.com" email="zsx@zsxsoft.com">zsx</author>
   <content src="index.html" />
-  <access origin="*.zsxsoft.com" />
   <vs:features />
   <preference name="SplashScreen" value="screen" />
   <preference name="windows-target-version" value="8.1" />
@@ -108,9 +107,11 @@
   <preference name="ShowTitle" value="True" />
   <preference name="InAppBrowserStorageEnabled" value="True" />
   <preference name="SuppressesIncrementalRendering" value="True" />
-  <access origin="zizhu.zsxsoft.com" />
-  <access origin="blog.zsxsoft.com" />
   <vs:plugin name="cordova-plugin-whitelist" version="1.0.0" />
   <vs:plugin name="cordova-plugin-xgpush" version="0.2.0" />
-
+  <access origin="zizhu.zsxsoft.com" />
+  <access origin="blog.zsxsoft.com" />
+  <access origin="static.zsxsoft.com" />
+  <access origin="static-file.zsxsoft.com" />
+  <access origin="cdn.staticfile.org" />
 </widget>
