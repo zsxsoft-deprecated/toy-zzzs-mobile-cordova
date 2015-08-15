@@ -1,3 +1,0 @@
-[submodule ".\\zzzs-mobile-cordova\\plugins\\com.phonegap.plugins.PushPlugin\\"]
-	path = .\\zzzs-mobile-cordova\\plugins\\com.phonegap.plugins.PushPlugin\\
-	url = https://github.com/phonegap-build/PushPlugin.git
