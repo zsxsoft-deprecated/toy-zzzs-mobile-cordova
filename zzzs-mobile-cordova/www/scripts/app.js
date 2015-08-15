@@ -43024,7 +43024,8 @@ module.exports = require('./lib/React');
 "use strict";
 
 module.exports = {
-    server: "http://zizhu.zsxsoft.com/api/"
+    server: "http://zizhu.zsxsoft.com/api/",
+    web: "http://zizhu.zsxsoft.com/"
 };
 
 },{}],359:[function(require,module,exports){
@@ -43041,19 +43042,120 @@ var Main = require('./routes/main.jsx');
 var Information = require('./routes/information.jsx');
 var Article = require('./routes/article.jsx');
 var Empty = require('./routes/empty.jsx');
+var Advanced = require('./routes/advanced.jsx');
+
 var AppRoutes = React.createElement(
-    Route,
-    { name: 'root', path: '/', handler: Main },
-    React.createElement(Route, { path: '/information/', handler: Information }),
-    React.createElement(Route, { name: 'information', path: '/information/:param', handler: Information }),
-    React.createElement(Route, { name: 'article', path: '/article/:id', handler: Article }),
-    React.createElement(Route, { name: 'empty', handler: Empty }),
-    React.createElement(DefaultRoute, { handler: Information })
+       Route,
+       { name: 'root', path: '/', handler: Main },
+       React.createElement(Route, { path: '/information/', handler: Information }),
+       React.createElement(Route, { name: 'information', path: '/information/:param', handler: Information }),
+       React.createElement(Route, { name: 'article', path: '/article/:id', handler: Article }),
+       React.createElement(Route, { name: 'advanced', handler: Advanced }),
+       React.createElement(Route, { name: 'empty', handler: Empty }),
+       React.createElement(DefaultRoute, { handler: Information })
 );
 
 module.exports = AppRoutes;
 
-},{"./routes/article.jsx":360,"./routes/empty.jsx":361,"./routes/information.jsx":362,"./routes/main.jsx":363,"react":357,"react-router":166}],360:[function(require,module,exports){
+},{"./routes/advanced.jsx":360,"./routes/article.jsx":361,"./routes/empty.jsx":362,"./routes/information.jsx":363,"./routes/main.jsx":364,"react":357,"react-router":166}],360:[function(require,module,exports){
+/** In this file, we create a React component which incorporates components provided by material-ui */
+
+'use strict';
+
+var React = require('react');
+var mui = require('material-ui');
+var Router = require('react-router');
+var config = require('../config');
+var utils = require('../utils');
+
+var TextField = mui.TextField;
+var RaisedButton = mui.RaisedButton;
+
+var Navigation = Router.Navigation;
+
+var ThemeManager = new mui.Styles.ThemeManager();
+var Colors = mui.Styles.Colors;
+
+var Information = React.createClass({
+    displayName: 'Information',
+
+    getInitialState: function getInitialState() {
+        return {
+            stdOut: ""
+        };
+    },
+
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
+
+    getChildContext: function getChildContext() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    },
+
+    ajaxThenOutput: function ajaxThenOutput(url) {
+        utils.getJsonAsync(config.server + url, (function (err, result) {
+            if (err !== null) {
+                return;
+            }
+            var stdOut = "";
+            if (result instanceof Array) {
+                stdOut = result.join("\n");
+            } else if (result instanceof Object) {
+                stdOut = JSON.stringify(result);
+            } else {
+                stdOut = result.toString();
+            }
+            this.setState({
+                stdOut: stdOut
+            });
+        }).bind(this));
+    },
+
+    read10Stdout: function read10Stdout() {
+        this.ajaxThenOutput("stdout/10");
+    },
+
+    readStdout: function readStdout() {
+        this.ajaxThenOutput("stdout/");
+    },
+
+    updateRobot: function updateRobot() {
+        this.ajaxThenOutput("robot");
+    },
+
+    render: function render() {
+
+        var text = this.state.stdOut;
+        return React.createElement(
+            'div',
+            { style: {} },
+            React.createElement(
+                'div',
+                { style: { padding: "5px" } },
+                React.createElement(RaisedButton, { label: 'Read 10 STDOUT', secondary: true, style: { float: "left", width: "49%" }, onClick: this.read10Stdout }),
+                React.createElement(RaisedButton, { label: 'Read ALL STDOUT', secondary: true, style: { float: "right", width: "50%" }, onClick: this.readStdout })
+            ),
+            React.createElement(
+                'div',
+                { style: { padding: "5px", top: "10px", position: "relative" } },
+                React.createElement(RaisedButton, { label: 'Robot Update', secondary: true, style: { width: "100%" }, onClick: this.updateRobot })
+            ),
+            React.createElement(
+                'div',
+                { style: { marginLeft: "10px", top: "20px", position: "relative" } },
+                React.createElement(TextField, { value: text, multiLine: true })
+            )
+        );
+    }
+
+});
+
+module.exports = Information;
+
+},{"../config":358,"../utils":365,"material-ui":37,"react":357,"react-router":166}],361:[function(require,module,exports){
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
 'use strict';
@@ -43137,7 +43239,7 @@ var Information = React.createClass({
 
 module.exports = Information;
 
-},{"../config":358,"../utils":364,"material-ui":37,"react":357,"react-router":166}],361:[function(require,module,exports){
+},{"../config":358,"../utils":365,"material-ui":37,"react":357,"react-router":166}],362:[function(require,module,exports){
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
 'use strict';
@@ -43169,7 +43271,7 @@ var Empty = React.createClass({
 
 module.exports = Empty;
 
-},{"material-ui":37,"react":357,"react-router":166}],362:[function(require,module,exports){
+},{"material-ui":37,"react":357,"react-router":166}],363:[function(require,module,exports){
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
 'use strict';
@@ -43310,13 +43412,14 @@ var Information = React.createClass({
 
 module.exports = Information;
 
-},{"../config":358,"../utils":364,"material-ui":37,"react":357,"react-router":166}],363:[function(require,module,exports){
+},{"../config":358,"../utils":365,"material-ui":37,"react":357,"react-router":166}],364:[function(require,module,exports){
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
 'use strict';
 
 var React = require('react');
 var mui = require('material-ui');
+var config = require('../config.js');
 var Router = require('react-router');
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -43360,7 +43463,7 @@ var menuItems = [{
     text: '刷新'
 }, {
     click: function click() {
-        alert(location.hash);
+        window.open(config.web + unescape(location.hash).replace("#/", "").replace("information/url=", ""));
     },
     text: '浏览器'
 }];
@@ -43442,7 +43545,7 @@ Main.contextTypes = {
 };
 module.exports = Main;
 
-},{"material-ui":37,"react":357,"react-router":166}],364:[function(require,module,exports){
+},{"../config.js":358,"material-ui":37,"react":357,"react-router":166}],365:[function(require,module,exports){
 /**
 * 异步得到json
 * @exports

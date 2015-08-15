@@ -2,6 +2,7 @@
 
 let React = require('react');
 let mui = require('material-ui');
+let config = require('../config.js');
 let Router = require('react-router');
 let { Route, RouteHandler, Link } = Router; 
 let { LeftNav, AppBar, MenuItem, IconMenu, IconButton, SvgIcon, Styles } = mui;
@@ -35,7 +36,7 @@ let menuItems = [{
     text: '刷新'
 }, {
     click: () => {
-        alert(location.hash);
+        window.open(config.web + unescape(location.hash).replace("#/", "").replace("information/url=", ""));
     }, 
     text: '浏览器'
 }];
