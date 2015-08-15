@@ -43190,10 +43190,12 @@ var SvgIcon = mui.SvgIcon;
 var IconButton = mui.IconButton;
 
 var Navigation = Router.Navigation;
+var Link = Router.Link;
 
 var ThemeManager = new mui.Styles.ThemeManager();
 var Colors = mui.Styles.Colors;
 
+var route = "";
 var Information = React.createClass({
     displayName: 'Information',
 
@@ -43209,10 +43211,7 @@ var Information = React.createClass({
         paramObject = paramObject || this.props;
         var param = paramObject.params.param;
         param = param || "";
-        var route = unescape(param.replace("url=", ""));
-        if (route != "") {
-            route = "?category=" + route;
-        }
+        route = unescape(param.replace("url=", ""));
         utils.getJsonAsync(config.server + "list/" + route, (function (err, result) {
             if (err !== null) {
                 return;
@@ -43243,6 +43242,14 @@ var Information = React.createClass({
 
     _openOffical: function _openOffical(url) {},
 
+    _toNextPage: function _toNextPage() {
+        var pList = this.state.pList || [];
+        route = route.replace(/(\?|\&)id=\d+/, "");
+        var nextPage = "/information/\?url=" + encodeURIComponent(route + (route == "" ? "\?" : "\&") + "id=" + (pList.length == 0 ? "" : pList[pList.length - 1].id));
+        console.log(nextPage);
+        this.transitionTo(nextPage);
+    },
+
     render: function render() {
         var _this = this;
 
@@ -43258,50 +43265,45 @@ var Information = React.createClass({
                 React.createElement('path', { d: 'M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z', 'data-reactid': '.0.$=12:0.0.0.1:1.1.1:a.0.0.1:4.0.0.1.$1.0.0.1:2:$=10:0.0' })
             )
         );
-        var rightIconMenu = React.createElement(
-            IconMenu,
-            { iconButtonElement: iconButtonElement },
-            React.createElement(
-                MenuItem,
-                { onClick: this._openArticle.bind(this, card.id) },
-                '打开'
-            ),
-            React.createElement(
-                MenuItem,
-                { onClick: this._openOffical.bind(this, card.id) },
-                '官网'
-            )
-        );
 
         var pList = this.state.pList || [];
+
         return React.createElement(
-            List,
-            null,
-            pList.map(function (card) {
-                return React.createElement(ListItem, {
-                    onClick: _this._openArticle.bind(_this, card.id),
-                    leftAvatar: React.createElement(
-                        Avatar,
-                        null,
-                        card.source.replace(/来源(：|:)/, "").substr(0, 1)
-                    ),
-                    rightIconButton: rightIconMenu,
-                    primaryText: card.title.substr(0, 12) + '...',
-                    secondaryText: React.createElement(
-                        'p',
-                        null,
-                        React.createElement(
-                            'span',
-                            { style: { color: Colors.darkBlack } },
-                            card.source.replace(/来源(：|:)/, ""),
-                            ' / ',
-                            card.time
+            'div',
+            this.props,
+            React.createElement(
+                List,
+                null,
+                pList.map(function (card) {
+                    return React.createElement(ListItem, {
+                        onClick: _this._openArticle.bind(_this, card.id),
+                        leftAvatar: React.createElement(
+                            Avatar,
+                            null,
+                            card.source.replace(/来源(：|:)/, "").substr(0, 1)
                         ),
-                        React.createElement('br', null),
-                        card.intro.substr(0, 20)
-                    ), secondaryTextLines: 2 });
-            })
-        );
+                        primaryText: card.title.substr(0, 12) + '...',
+                        secondaryText: React.createElement(
+                            'p',
+                            null,
+                            React.createElement(
+                                'span',
+                                { style: { color: Colors.darkBlack } },
+                                card.source.replace(/来源(：|:)/, ""),
+                                ' / ',
+                                card.time
+                            ),
+                            React.createElement('br', null),
+                            card.intro.substr(0, 20)
+                        ), secondaryTextLines: 2 });
+                })
+            ),
+            React.createElement(
+                FlatButton,
+                { onClick: this._toNextPage },
+                '下一页'
+            )
+        ); // 就不做无限下拉了
     }
 
 });
@@ -43332,13 +43334,13 @@ var Typography = Styles.Typography;
 
 var ThemeManager = new mui.Styles.ThemeManager();
 var menuItems = [{
-    route: '/information/\?url=gkxx%2Fzzzs%2F',
+    route: '/information/\?url=%3Fcategory%3Dgkxx%2Fzzzs%2F',
     text: '自招动态'
 }, {
-    route: '/information/\?url=gkxx%2Fzzzs%2Fbkzn%2F',
+    route: '/information/\?url=%3Fcategory%3Dgkxx%2Fzzzs%2Fbkzn%2F',
     text: '报考指南'
 }, {
-    route: '/information/\?url=gkxx%2Fzzzs%2Fgxzc%2F',
+    route: '/information/\?url=%3Fcategory%3Dgkxx%2Fzzzs%2Fgxzc%2F',
     text: '高校政策'
 }, {
     route: 'advanced',
@@ -43395,6 +43397,7 @@ var Main = React.createClass({
         if (payload.click) {
             payload.click.call(this);
         } else {
+            console.log(payload.route);
             this.context.router.transitionTo(payload.route);
         }
     },

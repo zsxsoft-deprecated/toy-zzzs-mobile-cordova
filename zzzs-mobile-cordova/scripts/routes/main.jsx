@@ -9,13 +9,13 @@ let { Colors, Spacing, Typography } = Styles;
 
 let ThemeManager = new mui.Styles.ThemeManager();
 let menuItems = [{
-    route: '/information/\?url=gkxx%2Fzzzs%2F',
+    route: '/information/\?url=%3Fcategory%3Dgkxx%2Fzzzs%2F',
     text: '自招动态'
 }, {
-    route: '/information/\?url=gkxx%2Fzzzs%2Fbkzn%2F',
+    route: '/information/\?url=%3Fcategory%3Dgkxx%2Fzzzs%2Fbkzn%2F',
     text: '报考指南'
 }, {
-    route: '/information/\?url=gkxx%2Fzzzs%2Fgxzc%2F',
+    route: '/information/\?url=%3Fcategory%3Dgkxx%2Fzzzs%2Fgxzc%2F',
     text: '高校政策'
 }, {
     route: 'advanced',
@@ -72,6 +72,7 @@ let Main = React.createClass({
         if (payload.click) {
             payload.click.call(this);
         } else {
+            console.log(payload.route);
             this.context.router.transitionTo(payload.route);
         }
         
