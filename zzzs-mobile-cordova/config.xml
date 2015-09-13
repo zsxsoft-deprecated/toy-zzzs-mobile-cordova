@@ -114,4 +114,7 @@
   <access origin="static.zsxsoft.com" />
   <access origin="static-file.zsxsoft.com" />
   <access origin="cdn.staticfile.org" />
+  <vs:plugin name="cordova-plugin-statusbar" version="1.0.1" />
+  <preference name="StatusBarBackgroundColor" value="#00BCD4" />
+
 </widget>
